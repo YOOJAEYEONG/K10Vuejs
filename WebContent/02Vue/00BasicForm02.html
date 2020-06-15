@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <!-- Vuejs CDN 개발자용 -->
+    <!-- development version, includes helpful console warnings -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    
+    <!-- Vuejs CDN 배포용 -->
+    <!-- production version, optimized for size and speed -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+    $(function () {
+        var vue = new Vue({
+            el : '#app',
+            data : {
+                title : "hello Vuejs"
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{title}}</h2>
+    </div>
+</body>
+</html>
