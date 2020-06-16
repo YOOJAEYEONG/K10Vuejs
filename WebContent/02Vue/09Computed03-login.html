@@ -30,7 +30,11 @@
                   login : function () {
                       var loginMsg = this.id + '님, 인증전입니다.';
                       if(this.id=='kosmo' && this.pass=='1234'){
-                          loginMsg = '<span style="color:red;">'+this.id+'님, 인증되었습니다. 환영합니다.</span>';
+                          //style 속성이 적용되지 않은 텍스트 그대로 출력된다.
+                          //loginMsg = '<span style="color:red;">'+this.id+'님, 인증되었습니다. 환영합니다.</span>';
+
+                          //새로 변경한 출력형태는 style이 적용된다.
+                          loginMsg = this.id+'님, 인증되었습니다. 환영합니다.';
                       }
                       return loginMsg;
                   }
@@ -47,7 +51,9 @@
         아이디 : <input type="text" v-model='id'><br>
         패스워드 : <input type="text" v-model='pass'><br>
         <!-- style속성이 제대로 적용되지 않았다. 다른방법이 있다고.. -->
-        <span v-show='id!=""'>{{login}}</span>
+        <span v-show='id!=""' >{{login}}</span>
+        <!-- style속성이 제대로 적용되었다 -->
+        <span v-show='id!=""' style="color:red;">{{login}}</span>
     </div>
 </body>
 </html>
