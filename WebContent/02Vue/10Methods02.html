@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Vuejs CDN 개발자용 -->
+    <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+
+
+<!-- 
+methods vs computed
+    : 선언과 호출방법은 거의 동일하지만 computed의 myGop3는
+    자신이 참조하고 있는 num이 변경될때만 재실행된다.
+    methods는 myGop2()는 num뿐만 아니라 자신과 상관없는
+    diffnum이 변경될때도 재실행된다.
+    즉, 모든상황에서 재실행이 필요하다면 methods를 사용하고, 
+    참조하는 변수의 변경에만 재실행되게 하려면 computed를 사용해야한다.
+-->
+
+    <script>
+        $(function () {
+            var vue = new Vue({
+                el: '#app',
+                data: {
+                    title : 'methods vs computed',
+                    num : 0,
+                    diffnum : 0 //추가
+                },
+                //관련이 없는 diffnum이 변경되더라도 methods는 호출되는 특성이 있다.
+                methods : {
+                    
+                   myGop2 : function () {
+                       let result = this.num * 2;
+                       console.log('myGop2', result);
+                       return result;
+                   }
+                },
+                computed : {
+                    myGop3 : function name(params) {
+                        let result = this.num * 3;
+                        console.log('myGop3', result);
+                        return result;
+                    }
+                }
+            });
+        });
+    </script>
+    
+</head>
+<body>
+    <div id='app'>
+        <h2>{{title}}</h2>
+        
+        <p>num : {{num}}</p>
+        <p>methods(num*2) :     {{myGop2()}}</p>
+        <p>computed(num*3) :    {{myGop3}}</p>
+        <p>diffnum :            {{diffnum}}</p>
+
+        <!-- 콘솔창을 보면서 버튼을 눌러보면 차이가 있다 -->
+        <button v-on:click="num ++">클릭하세요(num++)</button>
+        <button v-on:click="diffnum ++">클릭하세요(diffnum++)</button>
+    </div>
+</body>
+</html>

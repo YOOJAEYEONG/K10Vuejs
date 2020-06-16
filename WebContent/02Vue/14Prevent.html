@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Vuejs CDN 개발자용 -->
+    <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+    <style>
+        div{background-color: aqua; padding: 50px;}
+    </style>
+
+<!-- 
+
+-->
+    <script>
+        $(function () {
+            var vue = new Vue({
+                el: '#app',
+                data: {
+                    title : 'preventDefault() 함수'
+                },
+                methods : {
+                    ctxStop : function(e){
+                        console.log("e가 뭔지 출력해본다",e);//마우스 클릭이벤트
+                        alert('마우스 우클릭금지');
+                    },
+                    ctxGo : function (e) {
+                        if( !confirm("페이스북으로 이동할까?") ){
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    
+</head>
+<body>
+    <div id='app' v-on:contextmenu.prevent="ctxStop">
+        <h2>{{title}}</h2>
+       
+        <a href="https://facebook.com" @click="ctxGo">페이스북으로</a>
+        
+    </div>
+</body>
+</html>
