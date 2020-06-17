@@ -18,8 +18,7 @@
 computed의 get/set속성
     : 입력시에는 set에 정의한 메소드가, 출력시에는 get에 정의한
     메소드가 자동으로 호출되는 기능
-
- -->
+-->
 
     <script>
         $(function () {
@@ -63,32 +62,12 @@ computed의 get/set속성
                                 }
                             }
                             else if(typeof(param)==='number'){
-                                this.param = amt;//this.amt 가 아닌데 에러가 없다
+                                this.amt = param;//this.amt 가 아닌데 에러가 없다
                             }
                         }
                     },
                     dddd : function () {
                         //기능을 추가하고 싶으면 이렇게 .
-                    }
-                }
-            });
-            new Vue({
-                el : "#a",
-                data : {
-                    b : 333
-                },
-                computed : {
-                    amount : {
-                        get : function(){
-                            console.log("inputVal:get");
-                            let isb = this.b;
-                            return isb;
-                            
-                        },
-                        set : function(param){
-                            console.log("inputVal:set", param);
-                            this.param = this.b;
-                        }
                     }
                 }
             });
@@ -108,12 +87,7 @@ computed의 get/set속성
 
     </div>
 
-    <div id="a">
-        <input  v-model="b">
-        <input v-model="amount"><!--입력시get이 호출되지 않는 이유?-->
-        <br>
-        결과 : {{b}} <br>
-        aaaa : {{amount}}
-    </div >
+
+
 </body>
 </html>

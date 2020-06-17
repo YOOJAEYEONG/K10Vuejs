@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Vuejs CDN 개발자용 -->
+    <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    
+
+
+
+
+
+    <script>
+    
+        Vue.component("global-component",{
+            template : "<div>전역 컴포넌트</div>"
+        });
+     
+        var local_comp = {
+            template : '<div>지역 컴포넌트</div>'
+        }
+
+
+
+        $(function () {
+            
+
+            new Vue({
+                el: '#app',
+                //컴포넌트 등록하기
+                components : {
+                    'local-component' : local_comp
+                }
+            });
+            new Vue({
+                el: '#app2',
+                /*
+                지역 컴포넌트를 등록하지 않으면 오류 발생됨. 콘솔에서 확인
+                유효범위가 다르기때문이다
+                */
+                // components : {
+                //     'local-component' : local_comp
+                // }
+            });
+
+        });
+    </script>  
+</head>
+<body>
+    <!-- 
+        컴포넌트의 최상위 계층은 body하위에서 선언된다.
+        계층구조로 부모에서 자식, 자식에서 손자로 계속해서 선언할수있다.
+        부모=>자식 컴포넌트로 데이터를 전달할때 props속성을 사용한다.
+        자식=>부모 컴포넌트로 데이터를 전달할때 이벤트로 해당내용을 호출하여 사용한다.
+            이때 .emit()을 활용한다.
+    -->
+    <div id='app' >
+        <h2>첫번째 인스턴스 지역</h2>
+        <global-component></global-component>
+        <local-component></local-component>
+    </div>
+    
+    <hr>
+    
+    <div id='app2' >
+        <h2>두번째 인스턴스 지역</h2>
+        <global-component></global-component>
+        <local-component></local-component>
+    </div>
+</body>
+</html>
