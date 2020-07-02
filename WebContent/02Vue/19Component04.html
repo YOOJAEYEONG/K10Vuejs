@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Vuejs CDN 개발자용 -->
+    <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <!-- 
+        [하위에서 상위 컴포넌트로 이벤트 전달]
+
+        $emit / v-on 속성
+            : 이벤트 발생과 수신을 위해 사용한다.
+        이벤트 발생
+            : this.$emit('이벤트명')
+        이벤트 수신
+            <컴포넌트 v-on:이벤트명='상위 컴포넌트의 메소드명'></컴포넌트>
+    -->
+    <!-- 
+        참고 
+        함수를 호출할때 showLog 이렇게 호출하고 있는데 JS에서
+        함수가 매개변수를 받지 않는 함수인경우 ()는 생략 가능하다.
+        따라서 showLog, 와 showLog() 형태로 호출가능하다.
+    -->
+    <script>
+        //하위컴포넌트
+        Vue.component('my-component', {
+            //1. 아래 버튼을 누르면 showLog()메소드가 호출됨
+            template : '<button v-on:click="showLog">보여주세요</button>',
+            methods : {
+                showLog : function () {
+                    //2. $emit()메소드가 호출되면 show-log 이벤트가 발생됨.
+                    //show-log 라는 사용자 정의 이벤트를 만든것이다.
+                    this.$emit('show-log');
+                }
+            }
+        });
+        $(function(){
+           
+            //상위 컴포넌트
+            new Vue({
+                el : "#app",
+                data : {
+                    message : "상위 컴포넌트의 메시지"
+                },
+                methods : {
+                    printText : function () {
+                        console.log('발생된 이벤트를 받았습니다.');
+                    }
+                }
+            });
+        });
+
+    </script>  
+</head>
+<body>
+   
+    <div id='app' >
+        <!-- 3. show-log 이벤트를  v-on이 리스닝해서 printText()메소드를 호출한다. -->
+        <my-component v-on:show-log="printText()"></my-component>
+    </div>
+   
+</body>
+</html>
