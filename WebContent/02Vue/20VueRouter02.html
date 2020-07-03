@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20VueRouter02</title>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Vuejs CDN 개발자용 -->
+    <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Vuejs Router를 사용하기위한 CDN -->
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+
+    <script>
+
+        /*
+        네임드뷰(Named View)
+            : 특정페이지로 이동했을때 여러개의 컴포넌트를
+            동시에 표시하는 라우팅 방식
+        */
+
+        //각 영역에 해당하는 템플릿 생성
+        var BodyTpl = {template : '<div>바디영역</div>'};
+        var HeaderTpl = {template : '<div>헤더영역</div>'};
+        var FooterTpl = {template : '<div>푸터 영역</div>'};
+
+        
+        //뷰라우터 객체를 정의하고 선언한 탬플릿을 컴포넌트로 등록
+        var router = new VueRouter({
+            //routes 는 속성명이므로 변경하면 에러
+            routes : [
+                {
+                    path : '/',
+                    components : {
+                        default : BodyTpl,
+                        header : HeaderTpl,
+                        footer : FooterTpl
+                    }
+                }
+            ]
+        });
+
+
+        $(function () {
+            //뷰생성및 마운트    
+            var vue = new Vue({
+                //el:'#app',    =>  .$mount('#app'); 와 동일
+                data : {
+                    title : '뷰라우터'
+                },
+                router
+            }).$mount('#app');
+        });
+    </script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{title}}</h2>
+        <h3>네임드뷰 : 한화면에 동일레벨의 여러 컴포넌트를 표시</h3>
+        
+        <!--컴퍼넌트 명이 default인경우 name속성 생략 가능 -->
+        <p>
+            
+            <router-view name="header"></router-view>
+            <router-view></router-view>
+            <router-view name = "footer"></router-view>
+        </p>
+   </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

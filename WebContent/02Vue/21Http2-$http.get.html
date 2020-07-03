@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21Http1-Promise01</title>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Vuejs CDN 개발자용 -->
+    <script src = "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Vuejs Router를 사용하기위한 CDN -->
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+
+    <!-- 이 예제에서 필요하 CDN추가함 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
+
+<!-- 
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
+    => vue-resource 는 Vue 이전버전에서 지원되던 라이브러리로 현재는 업데이트가 중단된 상태. 
+    호환성을 위해 사용은 가능함
+-->
+<!-- 
+내포트번호가 1006 이라면 아래 URL서버에서  
+내 포트 번호를 접속 허용해 주어야 한다. 만약 접속허용 설정이 안되있으면 
+아래같은 애러가 발생한다.
+
+Access to XMLHttpRequest at 'http://nakja.co.kr/kosmoAPI/json/board_list_json.php?tname=nboard_news' 
+from origin 'http://localhost:1004' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' 
+header has a value 'http://localhost:1006' that is not equal to the supplied origin.
+ -->
+    <script>
+    $(function () {
+        var vue = new Vue({
+            el : '#app',
+            data : {
+                title :'http통신 - $http.get()',
+                //통신을 통해 전달받을 JSON데이터를 저장할 변수
+                httpData : []
+            },
+            methods : {
+                getData : function (tname) {
+                    this.$http.get("http://nakja.co.kr/kosmoAPI/json/board_list_json.php?tname="+tname)
+                        .then((resData)=>{
+                            console.log(resData);
+                            console.log(resData.data);
+                            //성공시 받은 결과데이터를 변수에 대입한다.
+                            this.httpData = resData.data;
+                        })
+                        .catch((errData)=>{
+                            console.log("errData=>"+errData);
+                        });
+                    
+                }
+            }
+        });
+        //Vue객체에 정의된 getData()메소드를 첫 진입시 호출함
+        vue.getData('nboard_news');
+    });
+    </script>
+</head>
+<body>
+    <div id="app">
+        <h3>{{title}}}}</h3>
+        <button type="button" v-on:click="getData('nboard_news');">news게시판</button>
+        <button type="button" v-on:click="getData('nboard_jquery');">jquery게시판</button>
+        <button type="button" v-on:click="getData('nboard_homepage');">homepage게시판</button>
+        <p>{{httpData}}</p>
+   </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

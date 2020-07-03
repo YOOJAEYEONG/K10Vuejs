@@ -17,7 +17,8 @@
 
 
 
-<!-- 상위/하위관계가 아니라 관계가 없는 컴포넌트 간 통신을 위한 이벤트 버스
+<!-- 
+    상위/하위관계가 아니라 관계가 없는 컴포넌트 간 통신을 위한 이벤트 버스
     : 부모-자식간의 관계가 없을때 컴포넌트간 통신을 위한 방법
 -->
     <script>
@@ -30,9 +31,10 @@
             template을 정의할때 HTML태그의 경우는 줄을 바꿔야 하는 경우가 많으므로
             +와 ""로 연결하는 것보다는 `(backquote)로 사용하는 것이 편리하다.
             */
-            template : `
+            template : 
+                `
                 <div>
-                    하위컴포넌트 입니다.
+                    하위 your 컴포넌트 입니다.
                     <button v-on:click="showLog">보여주세요</button>
                 </div>
                 `,
@@ -44,6 +46,21 @@
                 }
             }
         });
+        Vue.component('my_component', {
+            
+            template : 
+                `
+                <div>
+                    하위 my 컴포넌트 입니다.
+                    
+                </div>
+                `,
+            created : function () {
+                eventBus.$on('vEventBus', function (value) {
+                    console.log('이벤트를 전달 받음, 전달 받은 값 ', value);
+                });
+            }
+        });
 
 
 
@@ -51,14 +68,11 @@
             /*
             3. created 라이프사이클 훅으로 이벤트를 받는 로직을 선언한다.
                 이때 전달한 데이터 100을 받을 수 있다.
+                Vue객체 자체가 부모컴퍼넌트
             */
             var vue = new Vue({
-                el : "#app",
-                created : function () {
-                    eventBus.$on('vEventBus', function (value) {
-                        console.log('이벤트를 전달 받음, 전달 받은 값 ', value);
-                    });
-                }
+                el : "#app"
+                
             });
         });
 
@@ -66,8 +80,15 @@
 </head>
 <body>
    
+    <!-- 부모컴퍼넌트 -->
     <div id='app' >
+        <!-- 
+            div안쪽 엘리먼트가 자식컴퍼넌트가 된다
+            your_component, my_component 간은 부모관계도 
+            아니고 아무런 관계가 아닌컴포넌트
+        -->
        <your_component></your_component> 
+       <my_component></my_component> 
     </div>
    
 </body>
