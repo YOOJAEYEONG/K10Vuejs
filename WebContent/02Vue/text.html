@@ -1,0 +1,703 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!--Spring Security에서 제공하는 security 관련 태그사용을 위한 선언  -->
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<!--Spring Security에서 제공하는 form태그 사용을 위한 선언  -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- 
+<link rel="stylesheet"
+	href="https://og-data.s3.amazonaws.com/CACHE/css/da921b58086e.css"
+	type="text/css" />
+<link rel="stylesheet"
+	href="https://og-data.s3.amazonaws.com/CACHE/css/e702f4e34fd2.css"
+	type="text/css" />
+
+<link rel="stylesheet" href="../resources/css/ListFilter2.css"
+	type="text/css" />
+<link rel="stylesheet" href="../resources/css/ListFilter1.css"
+	type="text/css" /> 
+ -->
+<link rel="stylesheet" href="../resources/css/ListFilter.css"
+	type="text/css" />
+
+
+
+<div style="border: 1px solid blue">
+
+	<br /> 테마필터: ${requestScope.themeFltSet } 
+	<br /> 컬러필터: ${colorFltSet }
+	<br /> 사이즈:${sizeFltSet } 
+	<br /> 형태:${shapeFltSet } <br />
+	가격:${priceFltSet } <br />
+	<c:if test="${fn:contains('가,나,다라마','호') }">
+		<b>호</b>
+	</c:if>
+	<br />
+</div>
+
+<div>
+	<input id="themeFltSet" value="${fltTheme }" h-idden="hidden" type="text" /> 
+	<input id="colorFltSet" value="${fltColor }"h-idden="hidden" type="text" /> 
+	<input id="sizeFltSet"	value="${fltSize }" h-idden="hidden" type="text" /> 
+	<input id="shapeFltSet" value="${fltShape }" h-idden="hidden" type="text" />
+	<input id="priceFltSet" value="${fltPrice }" h-idden="hidden" type="text" />
+
+</div>
+
+
+<div>
+
+	<form:form name="filterFrm_pc"
+		action="${pageContext.request.contextPath }/showroom/art">
+
+		<div id="ds-filter-container-pc">
+			<div class="ds-filter-item">
+				<div class="ds-filter-title">테마</div>
+				<div class="ds-filter-tags">
+					<div class="ds-filter-tag-theme">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-theme-1" name="fltTheme" data-context="인물"
+							value="인물" /> <label for="ds-filter-theme-1">인물</label>
+					</div>
+
+					<div class="ds-filter-tag-theme">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-theme-2" name="fltTheme" data-context="풍경"
+							value="풍경" /> <label for="ds-filter-theme-2">풍경</label>
+					</div>
+					<div class="ds-filter-tag-theme">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-theme-3" name="fltTheme" data-context="정물"
+							value="정물" /> <label for="ds-filter-theme-3">정물</label>
+					</div>
+					<div class="ds-filter-tag-theme">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-theme-4" name="fltTheme" data-context="동물"
+							value="동물" /> <label for="ds-filter-theme-4">동물</label>
+					</div>
+					<div class="ds-filter-tag-theme">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-theme-5" name="fltTheme" data-context="상상"
+							value="상상" /> <label for="ds-filter-theme-5">상상</label>
+					</div>
+					<div class="ds-filter-tag-theme">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-theme-6" name="fltTheme" data-context="추상"
+							value="추상" /> <label for="ds-filter-theme-6">추상</label>
+					</div>
+				</div>
+			</div>
+			<div class="ds-filter-item">
+				<div class="ds-filter-title">색상</div>
+				<div class="ds-filter-tags cf">
+					<div class="ds-filter-tag-color">
+						<input type="checkbox"
+							class="ds-filter-tag-bt-checkbox dsf-tbc-color red"
+							id="ds-filter-color-1" name="fltColor" data-context="1"
+							value="빨강" /> <label for="ds-filter-color-1"></label>
+					</div>
+					<div class="ds-filter-tag-color">
+						<input type="checkbox"
+							class="ds-filter-tag-bt-checkbox dsf-tbc-color blue"
+							id="ds-filter-color-2" name="fltColor" data-context="2"
+							value="파랑" /> <label for="ds-filter-color-2"></label>
+					</div>
+					<div class="ds-filter-tag-color">
+						<input type="checkbox"
+							class="ds-filter-tag-bt-checkbox dsf-tbc-color green"
+							id="ds-filter-color-3" name="fltColor" data-context="3"
+							value="초록" /> <label for="ds-filter-color-3"></label>
+					</div>
+					<div class="ds-filter-tag-color">
+						<input type="checkbox"
+							class="ds-filter-tag-bt-checkbox dsf-tbc-color yellow"
+							id="ds-filter-color-4" name="fltColor" data-context="4"
+							value="노랑" /> <label for="ds-filter-color-4"></label>
+					</div>
+					<div class="ds-filter-tag-color">
+						<input type="checkbox"
+							class="ds-filter-tag-bt-checkbox dsf-tbc-color pastel"
+							id="ds-filter-color-5" name="fltColor" data-context="5"
+							value="파스텔" /> <label for="ds-filter-color-5"></label>
+					</div>
+					<div class="ds-filter-tag-color">
+						<input type="checkbox"
+							class="ds-filter-tag-bt-checkbox dsf-tbc-color b-w"
+							id="ds-filter-color-6" name="fltColor" data-context="6"
+							value="흑백" /> <label for="ds-filter-color-6"></label>
+					</div>
+					<div class="ds-filter-tag-color">
+						<input type="checkbox"
+							class="ds-filter-tag-bt-checkbox dsf-tbc-color multiple"
+							id="ds-filter-color-7" name="fltColor" data-context="7"
+							value="무지개" /> <label for="ds-filter-color-7"></label>
+					</div>
+				</div>
+			</div>
+			<div class="ds-filter-item size">
+				<div class="ds-filter-title">
+					사이즈
+					<div class="ds-filter-fold-btn"></div>
+				</div>
+				<div class="ds-filter-tags">
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-1" name="fltSize" data-context="1~5호"
+							value="5호까지" /> <label for="ds-filter-size-1">1~5호<br />
+							<span>(렌탈불가)</span></label>
+					</div>
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-2" name="fltSize" data-context="6~10호"
+							value="10호까지" /> <label for="ds-filter-size-2">6~10호<br />
+							<span>(월 3.9만원)</span></label>
+					</div>
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-3" name="fltSize" data-context="~20호"
+							value="20호까지" /> <label for="ds-filter-size-3">~20호<br />
+							<span>(월 6.9만원)</span></label>
+					</div>
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-4" name="fltSize" data-context="~30호"
+							value="30호까지" /> <label for="ds-filter-size-4">~30호<br />
+							<span>(월 9.9만원)</span></label>
+					</div>
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-5" name="fltSize" data-context="~40호"
+							value="40호까지" /> <label for="ds-filter-size-5">~40호<br />
+							<span>(월 12만원)</span></label>
+					</div>
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-6" name="fltSize" data-context="~60호"
+							value="60호까지" /> <label for="ds-filter-size-6">~60호<br />
+							<span>(월 15만원)</span></label>
+					</div>
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-7" name="fltSize" data-context="80호"
+							value="80호까지" /> <label for="ds-filter-size-7">80호<br />
+							<span>(월 20만원)</span></label>
+					</div>
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-8" name="fltSize" data-context="100~120호"
+							value="120호까지" /> <label for="ds-filter-size-8">100~120호<br />
+							<span>(월 25~30만원)</span></label>
+					</div>
+					<div class="ds-filter-tag-size">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-size-9" name="fltSize" data-context="150호~"
+							value="150호이상" /> <label for="ds-filter-size-9">150호~<br />
+							<span>(월 40만원+)</span></label>
+					</div>
+				</div>
+			</div>
+			<div class="ds-filter-item shape">
+				<div class="ds-filter-title">형태</div>
+				<div class="ds-filter-tags">
+					<div class="ds-filter-tag-shape">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-shape-1" name="fltShape" data-context="정사각형"
+							value="정사각형" /> <label for="ds-filter-shape-1">정사각형</label>
+					</div>
+					<div class="ds-filter-tag-shape">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-shape-2" name="fltShape" data-context="가로형"
+							value="가로형" /> <label for="ds-filter-shape-2">가로형</label>
+					</div>
+					<div class="ds-filter-tag-shape">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-shape-3" name="fltShape" data-context="세로형"
+							value="세로형" /> <label for="ds-filter-shape-3">세로형</label>
+					</div>
+					<div class="ds-filter-tag-shape">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-shape-4" name="fltShape" data-context="세트"
+							value="세트" /> <label for="ds-filter-shape-4">세트</label>
+					</div>
+				</div>
+			</div>
+			<div class="ds-filter-item price">
+				<div class="ds-filter-title">구매가격</div>
+				<div class="ds-filter-tags">
+					<div class="ds-filter-tag-price">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-price-1" name="fltPrice" data-context="~30만원"
+							value="30만" /> <label for="ds-filter-price-1">~ 30만원</label>
+					</div>
+					<div class="ds-filter-tag-price">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-price-2" name="fltPrice" data-context="30만~50만원"
+							value="50만" /> <label for="ds-filter-price-2">30만 ~ <br />50만원
+						</label>
+					</div>
+					<div class="ds-filter-tag-price">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-price-3" name="fltPrice" data-context="50만~100만원"
+							value="100만" /> <label for="ds-filter-price-3">50만 ~ <br />100만원
+						</label>
+					</div>
+					<div class="ds-filter-tag-price">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-price-4" name="fltPrice" data-context="100만~200만원"
+							value="200만" /> <label for="ds-filter-price-4">100만 ~ <br />200만원
+						</label>
+					</div>
+					<div class="ds-filter-tag-price">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-price-5" name="fltPrice" data-context="200만~300만원"
+							value="300만" /> <label for="ds-filter-price-5">200만 ~ <br />300만원
+						</label>
+					</div>
+					<div class="ds-filter-tag-price">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-price-6" name="ftPprice" data-context="300만~500만원"
+							value="500만" /> <label for="ds-filter-price-6">300만 ~ <br />500만원
+						</label>
+					</div>
+					<div class="ds-filter-tag-price">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-price-7" name="fltPrice"
+							data-context="500만~1,000만원" value="1000만" /> <label
+							for="ds-filter-price-7">500만 ~ <br />1,000만원
+						</label>
+					</div>
+					<div class="ds-filter-tag-price">
+						<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+							id="ds-filter-price-8" name="fltPrice" data-context="1,000만원 ~"
+							value="1000만이상" /> <label for="ds-filter-price-8">1,000만원
+							~</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form:form>
+	<div id="ds-filter-container-mobile" class="cf">
+		<div class="ds-filter-header cf">
+			<div class="ds-filter-title active" data-index="1">테마</div>
+			<div class="ds-filter-title" data-index="2">색상</div>
+			<div class="ds-filter-title" data-index="3">사이즈</div>
+			<div class="ds-filter-title" data-index="4">형태</div>
+			<div class="ds-filter-title" data-index="5">구매가격</div>
+		</div>
+		<div class="ds-filter-content">
+			<div class="ds-filter-tags cf active" data-index="1">
+				<div class="ds-filter-tag-theme">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-theme-1" name="fltMobile" data-context="인물"
+						value="인물" /> <label for="ds-filter-m-theme-1">인물</label>
+
+				</div>
+				<div class="ds-filter-tag-theme">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-theme-2" name="fltMobile" data-context="풍경"
+						value="풍경" /> <label for="ds-filter-m-theme-2">풍경</label>
+				</div>
+				<div class="ds-filter-tag-theme">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-theme-3" name="fltMobile" data-context="정물"
+						value="정물" /> <label for="ds-filter-m-theme-3">정물</label>
+				</div>
+				<div class="ds-filter-tag-theme">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-theme-4" name="fltMobile" data-context="동물"
+						value="동물" /> <label for="ds-filter-m-theme-4">동물</label>
+				</div>
+				<div class="ds-filter-tag-theme">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-theme-5" name="fltMobile" data-context="상상"
+						value="상상" /> <label for="ds-filter-m-theme-5">상상</label>
+				</div>
+				<div class="ds-filter-tag-theme">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-theme-6" name="fltMobile" data-context="추상"
+						value="추상" /> <label for="ds-filter-m-theme-6">추상</label>
+				</div>
+			</div>
+			<div class="ds-filter-tags cf" data-index="2">
+				<div class="ds-filter-tag-color">
+					<input type="checkbox"
+						class="ds-filter-tag-bt-checkbox dsf-tbc-color red"
+						id="ds-filter-m-color-1" name="fltMobile" data-context="1"
+						value="빨강" /> <label for="ds-filter-m-color-1"></label>
+				</div>
+				<div class="ds-filter-tag-color">
+					<input type="checkbox"
+						class="ds-filter-tag-bt-checkbox dsf-tbc-color blue"
+						id="ds-filter-m-color-2" name="fltMobile" data-context="2"
+						value="파랑" /> <label for="ds-filter-m-color-2"></label>
+				</div>
+				<div class="ds-filter-tag-color">
+					<input type="checkbox"
+						class="ds-filter-tag-bt-checkbox dsf-tbc-color green"
+						id="ds-filter-m-color-3" name="fltMobile" data-context="3"
+						value="초록" /> <label for="ds-filter-m-color-3"></label>
+				</div>
+				<div class="ds-filter-tag-color">
+					<input type="checkbox"
+						class="ds-filter-tag-bt-checkbox dsf-tbc-color yellow"
+						id="ds-filter-m-color-4" name="fltMobile" data-context="4"
+						value="노랑" /> <label for="ds-filter-m-color-4"></label>
+				</div>
+				<div class="ds-filter-tag-color">
+					<input type="checkbox"
+						class="ds-filter-tag-bt-checkbox dsf-tbc-color pastel"
+						id="ds-filter-m-color-5" name="fltMobile" data-context="5"
+						value="파스텔" /> <label for="ds-filter-m-color-5"></label>
+				</div>
+				<div class="ds-filter-tag-color">
+					<input type="checkbox"
+						class="ds-filter-tag-bt-checkbox dsf-tbc-color b-w"
+						id="ds-filter-m-color-6" name="fltMobile" data-context="6"
+						value="흑백" /> <label for="ds-filter-m-color-6"></label>
+				</div>
+				<div class="ds-filter-tag-color">
+					<input type="checkbox"
+						class="ds-filter-tag-bt-checkbox dsf-tbc-color multiple"
+						id="ds-filter-m-color-7" name="fltMobile" data-context="7"
+						value="무지개" /> <label for="ds-filter-m-color-7"></label>
+				</div>
+			</div>
+			<div class="ds-filter-tags cf" data-index="3">
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-1" name="fltMobile" data-context="1~5호"
+						value="5호까지" /> <label for="ds-filter-m-size-1">1~5호<br />
+						<span>(렌탈불가)</span></label>
+				</div>
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-2" name="fltMobile" data-context="6~10호"
+						value="10호까지" /> <label for="ds-filter-m-size-2">6~10호<br />
+						<span>(월 3.9만원)</span></label>
+				</div>
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-3" name="fltMobile" data-context="~20호"
+						value="20호까지" /> <label for="ds-filter-m-size-3">~20호<br />
+						<span>(월 6.9만원)</span></label>
+				</div>
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-4" name="fltMobile" data-context="~30호"
+						value="30호까지" /> <label for="ds-filter-m-size-4">~30호<br />
+						<span>(월 9.9만원)</span></label>
+				</div>
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-5" name="fltMobile" data-context="~40호"
+						value="40호까지" /> <label for="ds-filter-m-size-5">~40호<br />
+						<span>(월 12만원)</span></label>
+				</div>
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-6" name="fltMobile" data-context="~60호"
+						value="60호까지" /> <label for="ds-filter-m-size-6">~60호<br />
+						<span>(월 15만원)</span></label>
+				</div>
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-7" name="fltMobile" data-context="80호"
+						value="80호까지" /> <label for="ds-filter-m-size-7">80호<br />
+						<span>(월 20만원)</span></label>
+				</div>
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-8" name="fltMobile" data-context="100~120호"
+						value="120호까지" /> <label for="ds-filter-m-size-8">100~120호<br />
+						<span>(월 25~30만원)</span></label>
+				</div>
+				<div class="ds-filter-tag-size">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-size-9" name="fltMobile" data-context="150호~"
+						value="150호까지" /> <label for="ds-filter-m-size-9">150호~<br />
+						<span>(월 40만원+)</span></label>
+				</div>
+			</div>
+			<div class="ds-filter-tags cf" data-index="4">
+				<div class="ds-filter-tag-shape">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-shape-1" name="fltMobile" data-context="정사각형"
+						value="정사각형" /> <label for="ds-filter-m-shape-1">정사각형</label>
+				</div>
+				<div class="ds-filter-tag-shape">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-shape-2" name="fltMobile" data-context="가로형"
+						value="가로형" /> <label for="ds-filter-m-shape-2">가로형</label>
+				</div>
+				<div class="ds-filter-tag-shape">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-shape-3" name="fltMobile" data-context="세로형"
+						value="세로형" /> <label for="ds-filter-m-shape-3">세로형</label>
+				</div>
+				<div class="ds-filter-tag-shape">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-shape-4" name="fltMobile" data-context="세트"
+						value="세트" /> <label for="ds-filter-m-shape-4">세트</label>
+				</div>
+			</div>
+			<div class="ds-filter-tags cf" data-index="5">
+				<div class="ds-filter-tag-price">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-price-1" name="fltMobile" data-context="~30만원"
+						value="30만" /> <label for="ds-filter-m-price-1">~ 30만원</label>
+				</div>
+				<div class="ds-filter-tag-price">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-price-2" name="fltMobile" data-context="30만~50만원"
+						value="50만" /> <label for="ds-filter-m-price-2">30만 ~ <br />50만원
+					</label>
+				</div>
+				<div class="ds-filter-tag-price">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-price-3" name="fltMobile" data-context="50만~100만원"
+						value="100만" /> <label for="ds-filter-m-price-3">50만 ~ <br />100만원
+					</label>
+				</div>
+				<div class="ds-filter-tag-price">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-price-4" name="fltMobile"
+						data-context="100만~200만원" value="200만" /> <label
+						for="ds-filter-m-price-4">100만 ~ <br />200만원
+					</label>
+				</div>
+				<div class="ds-filter-tag-price">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-price-5" name="fltMobile"
+						data-context="200만~300만원" value="300만" /> <label
+						for="ds-filter-m-price-5">200만 ~ <br />300만원
+					</label>
+				</div>
+				<div class="ds-filter-tag-price">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-price-6" name="fltMobile"
+						data-context="300만~500만원" value="500만" /> <label
+						for="ds-filter-m-price-6">300만 ~ <br />500만원
+					</label>
+				</div>
+				<div class="ds-filter-tag-price">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-price-7" name="fltMobile"
+						data-context="500만~1,000만원" value="1000만" /> <label
+						for="ds-filter-m-price-7">500만 ~ <br />1,000만원
+					</label>
+				</div>
+				<div class="ds-filter-tag-price">
+					<input type="checkbox" class="ds-filter-tag-bt-checkbox"
+						id="ds-filter-m-price-8" name="fltMobile" data-context="1,000만원 ~"
+						value="1000만이상" /> <label for="ds-filter-m-price-8">1,000만원
+						~</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="ds-selected-filter">
+		<div id="ds-selected-filter-list">
+			<div class="ds-selected-filter-left">
+				<!--필터에서 체크한 엘리먼트들이 이 안에 추가된다  document.querySelector("#ds-selected-filter-list > div > div:nth-child(1)")-->
+			</div>
+		</div>
+		<div class="ds-selected-filter-right">
+			<form:form name="fltDeleteFrm"
+				action="${pageContext.request.contextPath }/showroom/art">
+				<input name="deleteFlt" value="" type="text" hi-dden="hidden" />
+			</form:form>
+			<div id="filter-reset-btn">전체삭제</div>
+		</div>
+	</div>
+</div>
+
+</section>
+
+
+
+
+<section id="discover_contents">
+	<div id="ds-header-holder">
+		<div id="ds-header-inner" class="cf">
+			<span id="ds-filter-count-pc"> <span
+				class="ds-filter-count-num">32,828</span>점의 작품 검색됨
+			</span>
+			<div id="ds-filter-status" class="align-top align-text-top text-info">
+				<div>
+					<input type="checkbox" class="ds-filter-status-bt-checkbox btn"
+						id="ds-filter-rental" name="rental_available" value="true" /> <label
+						for="ds-filter-rental" class="align-text-middle">렌탈가능</label>
+				</div>
+				<div>
+					<input type="checkbox" class="ds-filter-status-bt-checkbox"
+						id="ds-filter-purchase" name="purchase_available" value="true" />
+					<label for="ds-filter-purchase">구매가능</label>
+				</div>
+			</div>
+
+			<div id="ds-sorting-select">
+				<div id="ds-sorting-select-selected">랜덤정렬</div>
+				<a class="ds-sorting-select-option selected" data-r_ex="0"
+					href="javascript:void(0);">랜덤정렬</a> <a
+					class="ds-sorting-select-option" data-r_ex="-1"
+					href="javascript:void(0);">최신등록순</a> <a
+					class="ds-sorting-select-option" data-r_ex="-2"
+					href="javascript:void(0);">작은호수순</a> <a
+					class="ds-sorting-select-option" data-r_ex="-3"
+					href="javascript:void(0);">낮은가격순</a>
+			</div>
+			<span id="ds-filter-count-m"> <span
+				class="ds-filter-count-num">32,828</span>점의 작품 검색됨
+			</span>
+		</div>
+	</div>
+	<button id="filter_collapse_btn" type="button"
+		class="btn btn-sm btn-light">필터 토글</button>
+</section>
+<!-- ///////////////////////////////////// -->
+
+<div class="container p-4">
+	<div class="row">
+		<div id="columns">
+			<c:forEach items="${artlists}" var="dto">
+				<figure>
+					<img src="${dto.imageUrl }">
+					<figcaption>
+						<div>
+							<h2 id="title">${dto.title }</h2>
+							<p id="sizeho">${dto.sizeHo }</p>
+							<p id="material">${dto.material }</p>
+							<p id="artvalue">${dto.artValue }</p>
+							<span id="theme">${dto.theme }</span> <span id="color">${dto.color }</span>
+						</div>
+					</figcaption>
+				</figure>
+			</c:forEach>
+		</div>
+
+	</div>
+
+	<div class="page_pageniation">
+		<nav aria-label="Page navigation example">
+			<!-- 페이지버튼 -->
+			<ul class="pagination justify-content-center">${pagingBtn }</ul>
+		</nav>
+	</div>
+</div>
+
+<!-- /////////////////////////////////////////// -->
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	let selectedFilter = "";
+	$(function() {
+		console.log("lead 이벤트");
+		//필터에서 전체 삭제 버튼을 누르는 경우
+		$("#filter-reset-btn").click(function() {
+			$("input [name='deleteFlt']").val("reset");
+			//document.fltDeleteFrm.submit();
+		});
+
+		let themeFltSet = $("#themeFltSet").val();
+		//[풍경,인물] => 풍경,인물
+		themeFltSet = themeFltSet.replace("[", "").replace("]", "");
+
+		console.log("테마체크박스들", $("[name='filterFrm_pc'] [name='fltTheme']"));
+		//pc용 폼 하위의 테마체크박스들을 선택함
+		$("[name='filterFrm_pc'] [name='fltTheme']").each(
+				function(index, item) {
+					/*
+					item은 인물, 풍경,등 체크박스 요소이다 
+					서버에서 받은 테마선택값들 중에 value 속성값과 일치하는것이 있으면
+					그 item 요소에 checked 속성 부여 한다.
+					 */
+					if (themeFltSet.includes(item.value)) {
+						$(item).attr("checked", "checked");
+					}
+					if (colorFltSet.includes(item.value)) {
+						$(item).attr("checked", "checked");
+					}
+				});
+
+		//모바일 페이지용 필터, pc용 페이지용 필터에서 선택하면 이벤트를 가져온다.
+		$("#ds-filter-container-mobile, #ds-filter-container-pc").on("change",
+				function(e) {
+					console.log("클릭한체크박스>" + e.target.name);//fltTheme
+					console.log("클릭한체크박스의 값>" + e.target.value);//인물
+					let chkBox = e.target.name;
+					let chkedValue = e.target.value;
+
+					document.filterFrm_pc.submit();
+				});
+
+	});
+</script>
+
+
+
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
